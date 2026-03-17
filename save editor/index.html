@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Timberborn Save Editor</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">SE</div>
+          <div class="brand-text">
+            <div class="brand-title">Save Editor</div>
+            <div class="brand-subtitle">Timberborn</div>
+          </div>
+        </div>
+
+        <nav class="nav">
+          <button class="nav-btn active" data-section="beavers">
+            Beavers
+          </button>
+          <button class="nav-btn" data-section="storage">Storage</button>
+          <button class="nav-btn" data-section="construction">
+            Construction
+          </button>
+          <button class="nav-btn" data-section="cheats">Cheats</button>
+        </nav>
+
+        <div class="sidebar-footer">
+          <label class="file-input">
+            Load .timber Save
+            <input type="file" id="importSave" accept=".timber" />
+          </label>
+          <label class="file-input">
+            Import Summary JSON
+            <input type="file" id="importSummary" accept=".json" />
+          </label>
+          <div class="note">
+            Prototype UI only. No save changes are written yet.
+          </div>
+        </div>
+      </aside>
+
+      <main class="content">
+        <header class="topbar">
+          <div class="title-block">
+            <h1 id="sectionTitle">Beavers</h1>
+            <p id="sectionSubtitle">Manage population and details.</p>
+          </div>
+          <div class="topbar-actions">
+            <button class="btn" id="saveTimber" disabled>Save .timber</button>
+            <div class="save-status" id="saveStatus">No save loaded</div>
+          </div>
+          <div class="summary">
+            <div class="summary-card">
+              <div class="summary-label">Cycle</div>
+              <div class="summary-value" id="summaryCycle">2-8</div>
+            </div>
+            <div class="summary-card">
+              <div class="summary-label">Science</div>
+              <div class="summary-value" id="summaryScience">2890</div>
+            </div>
+            <div class="summary-card">
+              <div class="summary-label">Beavers</div>
+              <div class="summary-value" id="summaryBeavers">21</div>
+            </div>
+          </div>
+        </header>
+
+        <section id="beavers" class="panel active">
+          <div class="panel-header">
+            <h2>Beavers</h2>
+            <button class="btn primary" id="addBeaver">Add Beaver</button>
+          </div>
+          <div class="panel-body">
+            <div class="table" id="beaverTable"></div>
+          </div>
+        </section>
+
+        <section id="storage" class="panel">
+          <div class="panel-header">
+            <h2>Storage</h2>
+            <div class="panel-actions">
+              <button class="btn primary" id="addStorage">Add Storage</button>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="table" id="storageTable"></div>
+          </div>
+        </section>
+
+        <section id="construction" class="panel">
+          <div class="panel-header">
+            <h2>Construction</h2>
+          </div>
+          <div class="panel-body">
+            <div class="table" id="constructionTable"></div>
+          </div>
+        </section>
+
+        <section id="cheats" class="panel">
+          <div class="panel-header">
+            <h2>Cheats</h2>
+          </div>
+          <div class="panel-body cheats-grid">
+            <div class="cheat-card">
+              <div class="cheat-title">Science Points</div>
+              <div class="cheat-row">
+                <input type="number" id="cheatSciencePoints" min="0" placeholder="Set amount" />
+                <button class="btn primary" id="applyScience">Set</button>
+              </div>
+            </div>
+            <div class="cheat-card">
+              <div class="cheat-title">Beavers Never Die</div>
+              <label class="switch">
+                <input type="checkbox" id="cheatNeverDie" />
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="cheat-card">
+              <div class="cheat-title">Infinite Storage</div>
+              <label class="switch">
+                <input type="checkbox" id="cheatInfStorage" />
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="cheat-card">
+              <div class="cheat-title">Spawn Beavers</div>
+              <div class="cheat-row">
+                <input
+                  type="number"
+                  id="cheatSpawnCount"
+                  min="1"
+                  value="1"
+                />
+                <button class="btn primary" id="spawnBeavers">
+                  Spawn
+                </button>
+              </div>
+            </div>
+            <div class="cheat-card">
+              <div class="cheat-title">No Drought</div>
+              <label class="switch">
+                <input type="checkbox" id="cheatNoDrought" />
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="cheat-card">
+              <div class="cheat-title">Unlock All Builds</div>
+              <label class="switch">
+                <input type="checkbox" id="cheatUnlockAll" />
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="cheat-card">
+              <div class="cheat-title">Fast Construction</div>
+              <label class="switch">
+                <input type="checkbox" id="cheatFastConstruction" />
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="cheat-card">
+              <div class="cheat-title">Easy Construction</div>
+              <label class="switch">
+                <input type="checkbox" id="cheatEasyConstruction" />
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="cheat-card">
+              <div class="cheat-title">Don't Die of Old Age</div>
+              <label class="switch">
+                <input type="checkbox" id="cheatNoOldAge" />
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="cheat-card">
+              <div class="cheat-title">No Needs</div>
+              <label class="switch">
+                <input type="checkbox" id="cheatNoNeeds" />
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="cheat-card">
+              <div class="cheat-title">Perfect Needs</div>
+              <label class="switch">
+                <input type="checkbox" id="cheatPerfectNeeds" />
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="cheat-card">
+              <div class="cheat-title">Game Speed</div>
+              <div class="cheat-row">
+                <input type="number" id="cheatGameSpeed" min="0.1" step="0.1" placeholder="1.0" />
+                <button class="btn primary" id="applyGameSpeed">Set</button>
+              </div>
+            </div>
+            <div class="cheat-card">
+              <div class="cheat-title">Unlimited Water</div>
+              <label class="switch">
+                <input type="checkbox" id="cheatUnlimitedWater" />
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="jszip.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
